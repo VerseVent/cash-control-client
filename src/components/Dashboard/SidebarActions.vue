@@ -25,6 +25,18 @@
       </li>
       <li class="nav-item my-2">
         <router-link
+          to="/bank"
+          class="nav-link bank-action"
+          aria-current="page"
+        >
+          <div class="d-flex align-items-center gap-2 p-1">
+            <IconBank class="bank-icon" />
+            <h2>Bank</h2>
+          </div>
+        </router-link>
+      </li>
+      <li class="nav-item my-2">
+        <router-link
           to="/stats"
           class="nav-link"
           aria-current="page"
@@ -104,11 +116,20 @@
 import IconCommunity from "../icons/IconCommunity.vue";
 import IconDocumentation from "../icons/IconDocumentation.vue";
 import IconSupport from "../icons/IconSupport.vue";
+import IconBank from "../icons/IconBank.vue";
 </script>
 
 <style>
 .router-link-exact-active {
   background-color: rgb(73, 73, 255) !important;
   color: white !important;
+}
+.bank-action {
+  background-color: rgba(155, 248, 136, 0.397) !important;
+  color: black !important;
+}
+.bank-action.router-link-exact-active {
+  color: black !important;
+  background-color: rgb(155, 248, 136) !important;
 }
 </style>

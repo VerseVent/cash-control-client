@@ -1,8 +1,8 @@
 <template>
   <main class="main__container row gx-0">
     <SidebarActions class="col-4" />
-    <div class="container-fluid col-6 d-flex justify-center">
-      <div class="bg" />
+    <div class="bg" />
+    <div class="container-fluid col-7">
       <router-view class="router__view" />
     </div>
   </main>

@@ -5,12 +5,15 @@ import Stats from "../components/Dashboard/Stats.vue";
 import Support from "../components/Dashboard/Support.vue";
 import SignupView from "../views/SignupView.vue";
 import Dashboard from "../components/Dashboard/Dashboard.vue";
+import BankActions from "../components/Dashboard/Bank/BankActions.vue";
+import { useUserStore } from "@/stores/user.js";
 
+const protectedRoutes = ["dashboard", "home", "bankActions", "stats", "support"];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/login",
       name: "login",
       component: LoginView,
     },
@@ -28,6 +31,11 @@ const router = createRouter({
        path: "",
        name: "home",
        component: Dashboard,
+        },
+      {
+       path: "/bank",
+       name: "bankActions",
+       component: BankActions,
       },
       {
        path: "/stats",
@@ -51,5 +59,18 @@ const router = createRouter({
     },
   ],
 });
+router.beforeEach(async(to, from, next) => {
+  if (protectedRoutes.includes(to.name)) {
+    try {
+      const userStore = useUserStore();
+      await userStore.checkAuth();
+    } catch (e) {
+      localStorage.clear();
+      next({name:'login'});
+    }
+  }
+  next();
+
+})
 
 export default router;

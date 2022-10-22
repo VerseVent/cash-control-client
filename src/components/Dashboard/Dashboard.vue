@@ -1,21 +1,41 @@
 <template>
-  <div v-if="showLoader" class="loader">Loading...</div>
+  <div
+    v-if="showLoader"
+    class="loader"
+  >
+    Loading...
+  </div>
   <div v-else>
-    <div v-if="!categories.length" class="dashboard">
-      <h1 class="category__title">Create purchase category</h1>
-      <form class="category__form" @submit.prevent="addCategory">
+    <div
+      v-if="!categories.length"
+      class="dashboard"
+    >
+      <h1 class="category__title">
+        Create purchase category
+      </h1>
+      <form
+        class="category__form"
+        @submit.prevent="addCategory"
+      >
         <label class="text-start mt-4 mx-1"> Category title </label>
         <input
           id="category-text"
           v-model="category.categoryTitle"
           class="category__input"
           type="text"
-        />
-        <button class="category__btn">Create</button>
-        <h2 class="app__title">© Cash Control</h2>
+        >
+        <button class="category__btn">
+          Create
+        </button>
+        <h2 class="app__title">
+          © Cash Control
+        </h2>
       </form>
     </div>
-    <Categories v-if="categories.length" :categories="categories" />
+    <Categories
+      v-if="categories.length"
+      :categories="categories"
+    />
   </div>
 </template>
 

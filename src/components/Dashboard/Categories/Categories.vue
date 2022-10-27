@@ -1,5 +1,5 @@
 <template>
-  <div class="decor__container">
+  <div class="decor__container rounded">
     <h1 class="categories__title">
       Purchase Categories
     </h1>
@@ -35,7 +35,6 @@ const props = defineProps({
 <style lang="scss">
 .decor__container {
   background-color: rgb(255, 255, 255);
-  border-radius: 15px;
   padding: 20px;
   margin-top: 20px;
 }

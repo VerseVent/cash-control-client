@@ -22,7 +22,9 @@ export const useUserStore = defineStore("user", {
       return this.axios.post("user/checkAuth");
     },
     async createBank(title, sum) {
-      const {piggyBank:{id,piggy_bank_title,goal_sum, current_sum}} = await this.axios.post("", { piggyBankTitle: title, goalSum:sum });//<---sashka endpoint
+      const { data: { piggyBank: { id, piggy_bank_title, goal_sum, current_sum } } } = await this.axios.post("piggyBank/add",
+        { piggyBankTitle: title, goalSum: sum });//<---sashka endpoint
+      
       this.userCurrentBank.id = id;
       this.userCurrentBank.title = piggy_bank_title;
       this.userCurrentBank.sum = goal_sum;

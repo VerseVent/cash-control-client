@@ -10,52 +10,44 @@
       v-if="!categories.length"
       class="dashboard"
     >
-      <h1 class="category__title">
-        Create purchase category
-      </h1>
-      <form
-        class="category__form"
-        @submit.prevent="addCategory"
-      >
-        <label class="text-start mt-4 mx-1"> Category title </label>
-        <input
-          id="category-text"
-          v-model="category.categoryTitle"
-          class="category__input"
-          type="text"
-        >
-        <button class="category__btn">
-          Create
-        </button>
-        <h2 class="app__title">
-          © Cash Control
-        </h2>
-      </form>
+      <CategoryForm @add-category="addCategory" />
     </div>
     <Categories
       v-if="categories.length"
       :categories="categories"
+    />
+    <button
+      v-if="categories.length"
+      class="btn btn-primary mt-2 ms-2"
+      @click="showCategoryForm = !showCategoryForm"
+    >
+      Create category
+    </button>
+    <CategoryForm
+      v-if="showCategoryForm"
+      @add-category="addCategory"
     />
   </div>
 </template>
 
 <script setup>
 import { useCategoryStore } from "@/stores/category.js";
+import CategoryForm from "./Categories/CategoryForm.vue";
 import Categories from "./Categories/Categories.vue";
 
 import { ref, onBeforeMount } from "vue";
-const category = ref({
-  categoryTitle: "",
-});
+
 const categoryStore = useCategoryStore();
 let categories = ref([]);
 let showLoader = ref(true);
+let showCategoryForm = ref(false);
 
-async function addCategory() {
+async function addCategory(category) {
   try {
-    await categoryStore.addCategory(category.value);
+    console.log(category);
+    await categoryStore.addCategory(category);
     const response = await categoryStore.getCategories();
-    categories.value = [...categories.value, ...response.data.categories];
+    categories.value = [...response.data.categories];
   } catch (e) {
     console.log(e);
   }
@@ -73,56 +65,21 @@ onBeforeMount(async () => {
 </script>
 
 <style lang="scss">
-.dashboard {
-  text-align: center;
-  margin-top: 45px;
-  border-radius: 15px;
-  padding: 70px;
-  background-color: rgb(255, 255, 255);
-  height: 600px;
-  min-height: 400px;
-  margin-right: 200px;
-}
-@media (max-width: 768px) {
-  .dashboard {
-    margin: 0 auto;
-  }
-}
-.category {
-  &__form {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-  }
-  &__title {
-    font-size: 24px;
-  }
-  &__input {
-    background: rgb(192, 255, 190);
-    padding: 15px;
-    height: 40px;
-    border: 2px solid #15d798;
-    border-radius: 15px;
-    margin: 10px 0;
-    &:focus {
-      background: #ffffff;
-    }
-  }
-  &__btn {
-    margin-top: 40px;
-    background: #15d798;
-    border-radius: 15px;
-    padding: 20px 45px;
-    color: #ffffff;
-    display: inline-block;
-    font: normal bold 26px/1 "Open Sans", sans-serif;
-    text-align: center;
-  }
-}
-.app__title {
-  margin-top: 90%;
-}
+// .dashboard {
+//   text-align: center;
+//   margin-top: 45px;
+//   border-radius: 15px;
+//   padding: 70px;
+//   background-color: rgb(255, 255, 255);
+//   height: 600px;
+//   min-height: 400px;
+//   margin-right: 200px;
+// }
+// @media (max-width: 768px) {
+//   .dashboard {
+//     margin: 0 auto;
+//   }
+// }
 
 .loader,
 .loader:before,

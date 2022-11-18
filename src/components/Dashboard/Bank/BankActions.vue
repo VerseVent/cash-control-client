@@ -1,3 +1,10 @@
+<script setup>
+import { ref } from "vue";
+import Bank from "./Bank.vue";
+import OtherBanks from "./OtherBanks.vue";
+
+const currentLocation = ref("myBank");
+</script>
 <template>
   <div>
     <ul class="bank__tabs nav nav-tabs w-100">
@@ -22,14 +29,6 @@
     <OtherBanks v-if="currentLocation === 'otherBanks'" />
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Bank from "./Bank.vue";
-import OtherBanks from "./OtherBanks.vue";
-
-const currentLocation = ref("myBank");
-</script>
 
 <style lang="scss">
 .bank__tabs {

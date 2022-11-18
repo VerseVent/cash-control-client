@@ -1,3 +1,21 @@
+<script setup>
+import IconCommunity from "../icons/IconCommunity.vue";
+import IconDocumentation from "../icons/IconDocumentation.vue";
+import IconSupport from "../icons/IconSupport.vue";
+import IconBank from "../icons/IconBank.vue";
+import { onMounted } from "vue";
+import { useUserStore } from "@/stores/user.js";
+
+const userStore = useUserStore();
+
+onMounted(async () => {
+  try {
+    await userStore.getBalance();
+  } catch (e) {
+    console.log(e);
+  }
+});
+</script>
 <template>
   <div
     class="d-flex flex-column flex-shrink-0 p-3 bg-light vh-100"
@@ -61,11 +79,11 @@
       </li>
     </ul>
     <hr>
-    <div class="dropdown">
+    <div class="row dropdown">
       <a
         id="dropdownUser2"
         href="#"
-        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+        class="col-6 d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
@@ -78,6 +96,10 @@
         >
         <strong>user</strong>
       </a>
+      <p class="col-6 text-center pt-1 text-black">
+        Balance:
+        <strong class="text-success bold">{{ userStore.balance }}$</strong>
+      </p>
       <ul
         class="dropdown-menu text-small shadow"
         aria-labelledby="dropdownUser2"
@@ -111,13 +133,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import IconCommunity from "../icons/IconCommunity.vue";
-import IconDocumentation from "../icons/IconDocumentation.vue";
-import IconSupport from "../icons/IconSupport.vue";
-import IconBank from "../icons/IconBank.vue";
-</script>
 
 <style>
 .router-link-exact-active {

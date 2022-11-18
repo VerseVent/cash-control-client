@@ -36,19 +36,20 @@
 
 <script setup>
 import { ref } from "vue";
-import { useUserStore } from "@/stores/user.js";
-const userStore = useUserStore();
+import { usePiggybankStore } from "@/stores/piggybank.js";
+const piggybankStore = usePiggybankStore();
+9;
 const bankTitle = ref("");
 const bankSum = ref(null);
 
 async function submitBankForm() {
   if (bankTitle.value !== "" && bankSum.value !== 0) {
     try {
-      await userStore.createBank(bankTitle.value, bankSum.value);
-      userStore.isBankCreated = true;
+      await piggybankStore.createBank(bankTitle.value, bankSum.value);
+      piggybankStore.isBankCreated = true;
     } catch (e) {
       console.log(e);
-      userStore.isBankCreated = false;
+      piggybankStore.isBankCreated = false;
     }
   }
 }

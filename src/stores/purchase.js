@@ -1,12 +1,15 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore("purchase", () => {
-  const count = ref(0);
-  const doubleCount = computed(() => count.value * 2);
-  function increment() {
-    count.value++;
-  }
-
-  return { count, doubleCount, increment };
+export const usePurchaseStore = defineStore("purchase", {
+  actions: {
+    async addPurchase(category) {
+      return this.axios.post("category/add", { categoryTitle: category });
+    },
+    async getPurchases(categoryId) {
+      const res = await this.axios.get("purchase/allPurchases", {
+        params: { categoryId },
+      });
+      console.log(res);
+    },
+  },
 });

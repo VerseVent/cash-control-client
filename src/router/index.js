@@ -6,18 +6,26 @@ import Support from "../components/Dashboard/Support.vue";
 import SignupView from "../views/SignupView.vue";
 import Dashboard from "../components/Dashboard/Dashboard.vue";
 import BankActions from "../components/Dashboard/Bank/BankActions.vue";
+import Category from "../components/Dashboard/Categories/Category.vue";
 import { useUserStore } from "@/stores/user.js";
 
-const protectedRoutes = ["dashboard", "home", "bankActions", "stats", "support"];
+const protectedRoutes = [
+  "dashboard",
+  "home",
+  "bankActions",
+  "stats",
+  "support",
+  "category",
+];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/login",
+      path: "/",
       name: "login",
       component: LoginView,
     },
-      {
+    {
       path: "/signup",
       name: "signup",
       component: SignupView,
@@ -27,27 +35,32 @@ const router = createRouter({
       name: "dashboard",
       component: DashboardView,
       children: [
-      {
-       path: "",
-       name: "home",
-       component: Dashboard,
+        {
+          path: "",
+          name: "home",
+          component: Dashboard,
         },
-      {
-       path: "/bank",
-       name: "bankActions",
-       component: BankActions,
-      },
-      {
-       path: "/stats",
-       name: "stats",
-       component: Stats,
-      },
-      {
-      path: "/support",
-      name: "support",
-      component: Support,
-      },
-    ]
+        {
+          path: "/category/:categoryId",
+          name: "category",
+          component: Category,
+        },
+        {
+          path: "/bank",
+          name: "bankActions",
+          component: BankActions,
+        },
+        {
+          path: "/stats",
+          name: "stats",
+          component: Stats,
+        },
+        {
+          path: "/support",
+          name: "support",
+          component: Support,
+        },
+      ],
     },
     {
       path: "/about",
@@ -59,18 +72,17 @@ const router = createRouter({
     },
   ],
 });
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (protectedRoutes.includes(to.name)) {
     try {
       const userStore = useUserStore();
       await userStore.checkAuth();
     } catch (e) {
       localStorage.clear();
-      next({name:'login'});
+      next({ name: "login" });
     }
   }
   next();
-
-})
+});
 
 export default router;

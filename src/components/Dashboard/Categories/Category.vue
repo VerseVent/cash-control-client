@@ -15,9 +15,15 @@ onMounted(async () => {
 
   console.log(allPurchases.value)
 });
-function addPurchase(){
+async function addPurchase(){
   if(purchaseTitle.value.length>=1 && purchasePrice.value>0){
-    purchaseStore.addSinglePurchase(route.params.categoryId, purchaseTitle.value,purchasePrice.value)
+    try{
+      const lastAdded = await purchaseStore.addSinglePurchase(route.params.categoryId, purchaseTitle.value,purchasePrice.value);
+      console.log(lastAdded.data.purchases);
+      allPurchases.value = [...lastAdded.data.purchases ];
+    }catch(e){
+      console.log(e);
+    }
   }
 }
 const countSum = computed(()=>{

@@ -1,3 +1,23 @@
+  <script setup>
+  import { ref } from "vue";
+  import { usePiggybankStore } from "@/stores/piggybank.js";
+  const piggybankStore = usePiggybankStore();
+  9;
+  const bankTitle = ref("");
+  const bankSum = ref(null);
+  
+  async function submitBankForm() {
+    if (bankTitle.value !== "" && bankSum.value !== 0) {
+      try {
+        await piggybankStore.createBank(bankTitle.value, bankSum.value);
+        piggybankStore.isBankCreated = true;
+      } catch (e) {
+        console.log(e);
+        piggybankStore.isBankCreated = false;
+      }
+    }
+  }
+  </script>
 <template>
   <h1 class="otherbanks__title">
     Create your bank
@@ -34,24 +54,5 @@
   </button>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { useUserStore } from "@/stores/user.js";
-const userStore = useUserStore();
-const bankTitle = ref("");
-const bankSum = ref(null);
-
-async function submitBankForm() {
-  if (bankTitle.value !== "" && bankSum.value !== 0) {
-    try {
-      await userStore.createBank(bankTitle.value, bankSum.value);
-      userStore.isBankCreated = true;
-    } catch (e) {
-      console.log(e);
-      userStore.isBankCreated = false;
-    }
-  }
-}
-</script>
 
 <style></style>

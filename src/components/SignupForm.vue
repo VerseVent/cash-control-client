@@ -59,7 +59,7 @@ async function signupUser() {
           <button type="submit">
             Sign up
           </button>
-          <router-link to="/login">
+          <router-link to="/">
             <p class="sign-up">
               Login
             </p>

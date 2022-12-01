@@ -1,3 +1,19 @@
+<script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const props = defineProps({
+  categories: {
+    type: Array,
+    default() {
+      return [];
+    },
+  },
+});
+function openCategory(categoryId) {
+  router.push({ name: "category", params: { categoryId } });
+}
+</script>
 <template>
   <div class="decor__container rounded">
     <h1 class="categories__title">
@@ -11,26 +27,16 @@
       >
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-outline-primary"
+          @click="openCategory(category.categoryId)"
         >
           {{ category.categoryTitle }}
-          <span class="badge">4</span>
+          <span class="badge bg-primary">4</span>
         </button>
       </li>
     </ul>
   </div>
 </template>
-
-<script setup>
-const props = defineProps({
-  categories: {
-    type: Array,
-    default() {
-      return [];
-    },
-  },
-});
-</script>
 
 <style lang="scss">
 .decor__container {
@@ -48,9 +54,6 @@ const props = defineProps({
   }
   &__item {
     margin: 10px 10px 10px 0;
-    button {
-      background-color: rgb(102, 117, 255);
-    }
   }
 }
 </style>

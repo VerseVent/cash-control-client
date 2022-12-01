@@ -1,3 +1,10 @@
+<script setup>
+import { ref } from "vue";
+import Bank from "./Bank.vue";
+import OtherBanks from "./OtherBanks.vue";
+import AllBanks from "./AllBanks.vue";
+const currentLocation = ref("myBank");
+</script>
 <template>
   <div>
     <ul class="bank__tabs nav nav-tabs w-100">
@@ -12,24 +19,25 @@
       <li class="nav-item">
         <a
           class="nav-link"
-          :class="currentLocation === 'myBank' ? '' : 'active'"
+          :class="currentLocation === 'otherBanks' ? 'active' : ''"
           aria-current="page"
           @click="currentLocation = 'otherBanks'"
         >Other banks</a>
       </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          :class="currentLocation === 'allBanks' ? 'active' : ''"
+          aria-current="page"
+          @click="currentLocation = 'allBanks'"
+        >All banks</a>
+      </li>
     </ul>
     <Bank v-if="currentLocation === 'myBank'" />
     <OtherBanks v-if="currentLocation === 'otherBanks'" />
+    <AllBanks v-if="currentLocation === 'allBanks'" />
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Bank from "./Bank.vue";
-import OtherBanks from "./OtherBanks.vue";
-
-const currentLocation = ref("myBank");
-</script>
 
 <style lang="scss">
 .bank__tabs {

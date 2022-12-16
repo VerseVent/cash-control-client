@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import Bank from "./Bank.vue";
 import OtherBanks from "./OtherBanks.vue";
+import AllBanks from "./AllBanks.vue";
 
 const currentLocation = ref("myBank");
 </script>
@@ -19,14 +20,23 @@ const currentLocation = ref("myBank");
       <li class="nav-item">
         <a
           class="nav-link"
-          :class="currentLocation === 'myBank' ? '' : 'active'"
+          :class="currentLocation === 'otherBanks' ? 'active' : ''"
           aria-current="page"
           @click="currentLocation = 'otherBanks'"
         >Other banks</a>
       </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          :class="currentLocation === 'allBanks' ? 'active' : ''"
+          aria-current="page"
+          @click="currentLocation = 'allBanks'"
+        >All banks</a>
+      </li>
     </ul>
     <Bank v-if="currentLocation === 'myBank'" />
     <OtherBanks v-if="currentLocation === 'otherBanks'" />
+    <AllBanks v-if="currentLocation === 'allBanks'" />
   </div>
 </template>
 

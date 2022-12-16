@@ -124,10 +124,10 @@ onMounted(async () => {
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-          <a
+          <router-link
             class="dropdown-item"
-            href="#"
-          >Sign out</a>
+            to="/"
+          >Sign out</router-link>
         </li>
       </ul>
     </div>

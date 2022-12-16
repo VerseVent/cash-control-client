@@ -24,10 +24,7 @@ async function loginUser() {
 
 <template>
   <div class="form__container">
-    <form
-      class="decor"
-      @submit.prevent="loginUser"
-    >
+    <form class="decor" @submit.prevent="loginUser">
       <div class="form-left-decoration" />
       <div class="form-right-decoration" />
       <div class="circle" />
@@ -38,21 +35,17 @@ async function loginUser() {
             v-model.trim="loginBody.email"
             type="email"
             placeholder="Email"
-          >
+          />
           <input
             v-model.trim="loginBody.password"
             type="password"
             placeholder="Password"
-          >
+          />
         </div>
         <div class="controls">
-          <button type="submit">
-            Login
-          </button>
+          <button type="submit">Login</button>
           <router-link to="/signup">
-            <p class="sign-up">
-              Sign up
-            </p>
+            <p class="sign-up">Sign up</p>
           </router-link>
         </div>
       </div>
@@ -70,18 +63,22 @@ async function loginUser() {
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+
   &:hover {
     background-color: rgba(82, 165, 44, 0.425);
   }
 }
+
 .form__container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   min-height: 100vh;
@@ -91,6 +88,7 @@ body {
   font-size: 14px;
   color: #666;
 }
+
 input,
 textarea {
   outline: none;
@@ -100,6 +98,7 @@ h1 {
   margin-top: 0;
   font-weight: 500;
 }
+
 form {
   position: relative;
   min-height: 500px;
@@ -108,6 +107,7 @@ form {
   border-radius: 30px;
   background: #fff;
 }
+
 .form-left-decoration,
 .form-right-decoration {
   content: "";
@@ -117,14 +117,17 @@ form {
   border-radius: 20px;
   background: #46d352;
 }
+
 .form-left-decoration {
   bottom: 60px;
   left: -30px;
 }
+
 .form-right-decoration {
   top: 60px;
   right: -30px;
 }
+
 .form-left-decoration:before,
 .form-left-decoration:after,
 .form-right-decoration:before,
@@ -136,21 +139,26 @@ form {
   border-radius: 30px;
   background: #fff;
 }
+
 .form-left-decoration:before {
   top: -20px;
 }
+
 .form-left-decoration:after {
   top: 20px;
   left: 10px;
 }
+
 .form-right-decoration:before {
   top: -20px;
   right: 0;
 }
+
 .form-right-decoration:after {
   top: 20px;
   right: 10px;
 }
+
 .circle {
   position: absolute;
   bottom: 80px;
@@ -160,6 +168,7 @@ form {
   border-radius: 50%;
   background: #fff;
 }
+
 .form-inner {
   display: flex;
   justify-content: space-between;
@@ -167,6 +176,7 @@ form {
   gap: 40px;
   padding: 40px;
 }
+
 .form-inner input,
 .form-inner textarea {
   display: block;
@@ -177,9 +187,11 @@ form {
   border-radius: 20px;
   background: #d0dfe8;
 }
+
 .form-inner textarea {
   resize: none;
 }
+
 button {
   width: 100%;
   padding: 10px;
@@ -192,6 +204,7 @@ button {
   font-weight: 400;
   color: #fff;
 }
+
 button:hover {
   align-self: flex-end;
   background: #3e4f24;

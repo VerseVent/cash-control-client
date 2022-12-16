@@ -9,24 +9,23 @@ const amountToPay = ref(0);
 const bankProgress = ref("scaleY(0%)");
 const userStore = useUserStore();
 onMounted(async () => {
-  try{
-
+  try {
     await piggybankStore.getCurrentBank();
-    
+
     bankProgress.value = `scaleY(${
       (Number(piggybankStore.currentBank.currentSum) * 100) /
       Number(piggybankStore.currentBank.sum)
     }%)`;
-  }catch(e){
-    console.log("You dont have bank yet")
+  } catch (e) {
+    console.log("You dont have bank yet");
   }
 });
 async function closeCurrentBank() {
-  try{
+  try {
     await piggybankStore.deleteCurrentBank();
     await userStore.getBalance();
     piggybankStore.isBankCreated = false;
-  }catch(e){
+  } catch (e) {
     console.log(e);
   }
 }
@@ -40,10 +39,7 @@ async function topUpCurrentBank() {
 </script>
 <template>
   <div class="bank__bg">
-    <div
-      v-if="piggybankStore.isBankCreated"
-      class="bank__container"
-    >
+    <div v-if="piggybankStore.isBankCreated" class="bank__container">
       <h1 class="bank__title text-start">
         Bank: {{ piggybankStore.currentBank.title }}
       </h1>
@@ -51,21 +47,16 @@ async function topUpCurrentBank() {
         <div class="bank__progress col-md-6">
           <h3 class="text-black fs-4">
             Already paid:
-            <strong class="text-success">{{ piggybankStore.currentBank.currentSum }}$</strong>
+            <strong class="text-success"
+              >{{ piggybankStore.currentBank.currentSum }}$</strong
+            >
           </h3>
           <h3 class="pt-1">
             Sum to pay: {{ piggybankStore.currentBank.sum }}$
           </h3>
           <div class="progress__container">
-            <div
-              :style="{ transform: bankProgress }"
-              class="progress__bg"
-            />
-            <img
-              class="bank__img"
-              src="@/assets/bank.png"
-              alt="piggy_bank"
-            >
+            <div :style="{ transform: bankProgress }" class="progress__bg" />
+            <img class="bank__img" src="@/assets/bank.png" alt="piggy_bank" />
           </div>
         </div>
         <div class="col-md-5 border rounded p-4">
@@ -78,33 +69,25 @@ async function topUpCurrentBank() {
               class="form-control col-4 w-50"
               type="number"
               placeholder="Amount of money"
-            >
+            />
+
             <button
               class="col-4 btn btn-outline-success rounded"
               @click="topUpCurrentBank"
             >
-              <IconPay
-                class="mx-auto"
-                height="30px"
-              />
+              <IconPay class="mx-auto" height="30px" />
             </button>
           </div>
           <ul class="mt-3 bank__purchase-list p-4">
-            <h1 class="pb-4 fs-5 text-black text-start">
-              Last payments
-            </h1>
-            <li class="bank__purchase-item">
-              1
-            </li>
-            <li class="bank__purchase-item">
-              2
-            </li>
-            <li class="bank__purchase-item">
-              3
-            </li>
+            <h1 class="pb-4 fs-5 text-black text-start">Last payments</h1>
+            <li class="bank__purchase-item">1</li>
+            <li class="bank__purchase-item">2</li>
+            <li class="bank__purchase-item">3</li>
           </ul>
           <div class="text-end pt-3">
-            <button @click="closeCurrentBank" class="btn btn-outline-danger">Close bank</button>
+            <button class="btn btn-outline-danger" @click="closeCurrentBank">
+              Close bank
+            </button>
           </div>
         </div>
       </div>

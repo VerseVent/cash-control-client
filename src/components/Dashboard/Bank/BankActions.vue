@@ -3,6 +3,7 @@ import { ref } from "vue";
 import Bank from "./Bank.vue";
 import OtherBanks from "./OtherBanks.vue";
 import AllBanks from "./AllBanks.vue";
+
 const currentLocation = ref("myBank");
 </script>
 <template>
